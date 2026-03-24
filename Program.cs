@@ -6,6 +6,10 @@ using DynamicDnsUpdater.Client.Configuration;
 using Microsoft.Extensions.Configuration;
 using NuciAPI.Client;
 using Microsoft.Extensions.Options;
+using NuciLog.Core;
+using NuciLog;
+using NuciLog.Configuration;
+using System.Threading.Tasks;
 
 namespace DynamicDnsUpdater.Client
 {
@@ -19,13 +23,13 @@ namespace DynamicDnsUpdater.Client
         /// The entry point of the program, where the program control starts and ends.
         /// </summary>
         /// <param name="args">The command line arguments.</param>
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             inputSettings = new(args);
 
             BuildServiceProvider();
 
-            ServiceProvider
+            await ServiceProvider
                 .GetRequiredService<IDnsRecordService>()
                 .Update(inputSettings.DomainName, inputSettings.ProviderName);
         }
@@ -38,9 +42,12 @@ namespace DynamicDnsUpdater.Client
 
             ServiceProvider = new ServiceCollection()
                 .AddSingleton(configuration)
-                .Configure<ApiSettings>(configuration.GetSection("apiSettings"))
+                .Configure<ApiSettings>(configuration.GetSection(nameof(ApiSettings)))
+                .Configure<NuciLoggerSettings>(configuration.GetSection(nameof(NuciLoggerSettings)))
+                .AddSingleton(provider => provider.GetRequiredService<IOptions<NuciLoggerSettings>>().Value)
                 .AddTransient<IDnsRecordService, DnsRecordService>()
-                .AddTransient<INuciApiClient>(provider => new NuciApiClient(provider.GetRequiredService<IOptions<ApiSettings>>().Value.BaseUrl))
+                .AddSingleton<INuciApiClient>(provider => new NuciApiClient(provider.GetRequiredService<IOptions<ApiSettings>>().Value.BaseUrl))
+                .AddTransient<ILogger, NuciLogger>()
                 .BuildServiceProvider();
         }
     }
