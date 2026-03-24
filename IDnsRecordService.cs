@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 
-namespace DynamicDnsUpdater.Client.Service
+namespace DynamicDnsUpdater.Client
 {
-    public interface IDomainRecordService
+    public interface IDnsRecordService
     {
         Task Update(string domainName, string providerName);
     }
