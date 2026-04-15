@@ -1,15 +1,16 @@
 using System;
+using System.Threading.Tasks;
 
-using Microsoft.Extensions.DependencyInjection;
-
-using DynamicDnsUpdater.Client.Configuration;
 using Microsoft.Extensions.Configuration;
-using NuciAPI.Client;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+
+using NuciAPI.Client;
 using NuciLog.Core;
 using NuciLog;
 using NuciLog.Configuration;
-using System.Threading.Tasks;
+
+using DynamicDnsUpdater.Client.Configuration;
 
 namespace DynamicDnsUpdater.Client
 {
