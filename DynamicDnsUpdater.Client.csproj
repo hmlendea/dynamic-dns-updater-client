@@ -16,8 +16,8 @@
     <PackageReference Include="NuciAPI.Client" Version="1.2.3" />
     <PackageReference Include="NuciCLI.Arguments" Version="1.0.1" />
     <PackageReference Include="NuciLog" Version="1.2.0" />
-    <PackageReference Include="NuciLog.Core" Version="2.6.0" />
-    <PackageReference Include="NuciWeb.HTTP" Version="1.3.0" />
+    <PackageReference Include="NuciLog.Core" Version="2.6.2" />
+    <PackageReference Include="NuciWeb.HTTP" Version="1.6.0" />
   </ItemGroup>
 
   <ItemGroup>
