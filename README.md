@@ -110,6 +110,12 @@ The application logs operation start, success, and failure states through `NuciL
 - The client sends requests to `DnsRecords/{domainName}` on the configured API.
 - The `provider` value is passed through to the API as-is; accepted values depend on server-side configuration.
 
+## 🛡️ Privacy and Data
+
+Dynamic DNS Updater Client is a self-hosted command-line application that does not collect, store, or transmit personal data beyond what is necessary to update DNS records via the configured API. The application detects the public IP address and sends it along with the domain name, provider name, and API key to the Dynamic DNS Updater API endpoint configured by the operator.
+
+For the detailed description of how the application handles privacy and personal data, see [PRIVACY.md](./PRIVACY.md).
+
 ## 📑 Table of Contents
 
 - [Capabilities](#-capabilities)
