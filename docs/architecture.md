@@ -1,5 +1,7 @@
 # Architecture
 
+The root [Architecture](../ARCHITECTURE.md) is the system-level overview. These notes retain implementation-boundary observations and navigation into the detailed knowledge base; they are not a second architecture specification.
+
 ## Runtime Topology
 
 One console process constructs a dependency-injection container, performs one update, then returns. It makes outbound network requests and writes logs. There is no inbound HTTP host or locally authoritative DNS state.
@@ -33,4 +35,4 @@ Preserve the distinction between four observations: parsing succeeded, discovery
 
 ## Architectural Limits
 
-No root architecture document existed at review; this document describes the implemented topology rather than duplicating one. No recorded ADR explains the original design. [Design Decisions](./design-decisions.md) separates observations from inferred benefits and costs.
+No recorded ADR explains the original design. [Design Decisions](./design-decisions.md) separates observations from inferred benefits and costs. Use [Startup Flow](./flows/startup.md), [DNS Update Flow](./flows/dns-update.md), and [Change Guide](./change-guide.md) for implementation-level investigation beyond the root overview.

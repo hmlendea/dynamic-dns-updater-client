@@ -28,6 +28,7 @@ CLI application that updates a DNS record through the Dynamic DNS Updater API.
 - [GitHub Actions](#-github-actions)
 - [Project Structure](#-project-structure)
   - [Projects and Packages](#-projects-and-packages)
+- [Architecture](#-architecture)
 - [Documentation](#-documentation)
 - [FAQ](#-faq)
 - [Troubleshooting](#-troubleshooting)
@@ -161,6 +162,12 @@ This script downloads and executes an external release helper from `https://raw.
 |---------|------|---------|
 | `DynamicDnsUpdater.Client` | Console Application | Main CLI application |
 | `DynamicDnsUpdater.Client.UnitTests` | Unit Test Project | Unit tests for the client |
+
+## 🏗️ Architecture
+
+Dynamic DNS Updater Client is a one-shot .NET 10 console application that selects CLI inputs, discovers IPv4, and submits an authenticated update to an external DNS API. The client owns orchestration and logging; the server owns DNS-provider integration and mutation.
+
+See the [architecture documentation](./ARCHITECTURE.md) for the system context, principal components, runtime flows, ownership boundaries, dependencies, constraints, and extension points.
 
 ## 📚 Documentation
 
