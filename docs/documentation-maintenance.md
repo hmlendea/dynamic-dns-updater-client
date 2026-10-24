@@ -18,6 +18,6 @@ Do not turn tests of direct serialization into proof of HTTP transport behavior,
 
 ## Boundaries And Open Items
 
-[Open Questions](./ambiguities-and-open-questions.md) records unresolved source/prose mismatches and untested boundaries, not committed roadmap promises. Remove a gap only after evidence resolves it. If a root architecture document is added later, link it and keep [the runtime architecture explanation](./architecture.md) complementary rather than copying its contents.
+[Open Questions](./ambiguities-and-open-questions.md) records unresolved source/prose mismatches and untested boundaries, not committed roadmap promises. Remove a gap only after evidence resolves it. Keep [the root architecture overview](../ARCHITECTURE.md) synchronized with architectural changes and [the runtime architecture notes](./architecture.md) complementary rather than copying its contents.
 
 This documentation task does not change application behavior or silently correct production defects. Dependency source was inspected online; real discovery/API calls and release scripts were not executed.

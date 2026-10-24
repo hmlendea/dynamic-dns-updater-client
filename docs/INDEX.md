@@ -11,13 +11,14 @@ Read [Quick Start](./quick-start.md), [Repository Overview](./repository-overvie
 | Document | Authority |
 |---|---|
 | [README](../README.md) | Public project entry point |
+| [Architecture](../ARCHITECTURE.md) | System boundaries, components, lifecycle, and compatibility contracts |
 | [Security Policy](../SECURITY.md) | Supported versions and vulnerability disclosure |
 | [Privacy Policy](../PRIVACY.md) | Published data-handling policy; implementation discrepancies are recorded in [Open Questions](./ambiguities-and-open-questions.md) |
 | [License](../LICENSE) | Distribution terms |
 | [Contributing](../CONTRIBUTING.md) | Contribution process |
 | [Code Of Conduct](../CODE_OF_CONDUCT.md) | Community conduct |
 
-Root architecture and roadmap documents were absent at review. No replacement policy, licence, or roadmap is generated under this directory.
+The root roadmap document is absent. Root architecture is documented separately; no replacement policy, licence, or roadmap is generated under this directory.
 
 ## Documentation Catalogue
 
