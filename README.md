@@ -1,20 +1,38 @@
 [![Donate](https://img.shields.io/badge/-%E2%99%A5%20Donate-%23ff69b4)](https://hmlendea.go.ro/funding)
 [![Latest Release](https://img.shields.io/github/v/release/hmlendea/dynamic-dns-updater-client)](https://github.com/hmlendea/dynamic-dns-updater-client/releases/latest)
 [![Build Status](https://github.com/hmlendea/dynamic-dns-updater-client/actions/workflows/dotnet.yml/badge.svg)](https://github.com/hmlendea/dynamic-dns-updater-client/actions/workflows/dotnet.yml)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://gnu.org/licenses/gpl-3.0)
+[![License](https://img.shields.io/github/license/hmlendea/dynamic-dns-updater-client)](https://github.com/hmlendea/dynamic-dns-updater-client/blob/master/LICENSE)
 
-# About
+# Dynamic DNS Updater Client
+
 CLI application that updates a DNS record through the Dynamic DNS Updater API.
 
-# What It Does
+## 📑 Table of Contents
 
-This tool:
-
-- Detects the current public IP address of the machine
-- Sends an authenticated `PUT` request to the Dynamic DNS Updater API
-- Updates the DNS record for a given domain using a selected DNS provider
-
-It is useful for keeping DNS records in sync when your external IP changes.
+- [Capabilities](#-capabilities)
+- [Usage](#-usage)
+  - [CLI Options](#-cli-options)
+  - [Example](#-example)
+- [Installation](#-installation)
+- [Configuration](#-configuration)
+  - [Configuration Files](#-configuration-files)
+  - [Settings](#-settings)
+  - [Command-Line Options](#-command-line-options)
+- [Development](#-development)
+  - [Requirements](#-requirements)
+  - [Setup](#-setup)
+  - [Build](#-build)
+  - [Run](#-run)
+  - [Test](#-test)
+  - [Release](#-release)
+- [GitHub Actions](#-github-actions)
+- [Project Structure](#-project-structure)
+  - [Projects and Packages](#-projects-and-packages)
+- [Contributing](#-contributing)
+- [Code of Conduct](#-code-of-conduct)
+- [Security](#-security)
+- [Project Engagement](#-project-engagement)
+- [License](#-license)
 
 ## ✨ Capabilities
 
@@ -25,29 +43,7 @@ It is useful for keeping DNS records in sync when your external IP changes.
 
 ## 🚀 Usage
 
-### Requirements
-
-- .NET SDK 10.0+
-- Access to a running Dynamic DNS Updater API instance
-- A valid API key for that instance
-
-### Configuration
-
-The app reads configuration from `appsettings.json`.
-
-```json
-{
-	"apiSettings": {
-		"baseUrl": "https://your-api.example.com",
-		"apiKey": "your-api-key"
-	}
-}
-```
-
-#### Settings
-
-- `apiSettings.baseUrl`: Base URL of the Dynamic DNS Updater API
-- `apiSettings.apiKey`: Bearer token used to authenticate requests
+The application reads configuration from `appsettings.json` and accepts domain name and provider name as command-line arguments.
 
 ### CLI Options
 
@@ -63,19 +59,10 @@ Or run the built binary:
 ./DynamicDnsUpdater.Client -d your-domain.example.com -p your-provider
 ```
 
-Domain name options:
-
-- `-d`
-- `--dn`
-- `--domain`
-- `--domain-name`
-
-Provider name options:
-
-- `-p`
-- `--pn`
-- `--provider`
-- `--provider-name`
+| Option | Value | Default | Description |
+|--------|-------|---------|-------------|
+| `-d`, `--dn`, `--domain`, `--domain-name` | `<string>` | — | Domain name to update |
+| `-p`, `--pn`, `--provider`, `--provider-name` | `<string>` | — | DNS provider name |
 
 ### Example
 
@@ -83,51 +70,94 @@ Provider name options:
 dotnet run -- --domain-name example.com --provider-name cloudflare
 ```
 
-## 🛠️ Build
+## 📦 Installation
+
+[![Obtain it from GitHub](https://raw.githubusercontent.com/hmlendea/readme-assets/master/badges/stores/github.png)](https://github.com/hmlendea/dynamic-dns-updater-client/releases)
+
+Download the latest release from [GitHub Releases](https://github.com/hmlendea/dynamic-dns-updater-client/releases).
+
+## ⚙️ Configuration
+
+### Configuration Files
+
+| File | Scope | Purpose |
+|------|-------|---------|
+| `appsettings.json` | Application | API connection settings |
+
+### Settings
+
+The subsequent settings are recognised:
+
+| Section | Key | Type | Default | Required | Description |
+|---------|-----|------|---------|----------|-------------|
+| `apiSettings` | `baseUrl` | `string` | — | Yes | Base URL of the Dynamic DNS Updater API |
+| `apiSettings` | `apiKey` | `string` | — | Yes | Bearer token used to authenticate requests |
+
+### Command-Line Options
+
+| Option | Value | Default | Description |
+|--------|-------|---------|-------------|
+| `-d`, `--dn`, `--domain`, `--domain-name` | `<string>` | — | Domain name to update |
+| `-p`, `--pn`, `--provider`, `--provider-name` | `<string>` | — | DNS provider name |
+
+## 🛠️ Development
+
+### Requirements
+
+- [.NET 10.0 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
+
+### Setup
+
+```bash
+git clone https://github.com/hmlendea/dynamic-dns-updater-client.git
+cd dynamic-dns-updater-client
+dotnet restore
+```
+
+### Build
 
 ```bash
 dotnet build
 ```
 
-To publish a release build:
+### Run
 
 ```bash
-dotnet publish -c Release
+dotnet run --project DynamicDnsUpdater.Client -- --domain-name example.com --provider-name cloudflare
 ```
 
-## 📝 Logging
+### Test
 
-The application logs operation start, success, and failure states through `NuciLog`, including:
+```bash
+dotnet test
+```
 
-- Domain name
-- Provider name
-- API base URL
-- Detected public IP
-- API response code/message (on failure)
+### Release
 
-## 📋 Notes
+The repository includes `release.sh`, which delegates to the upstream deployment script used by the project maintainer.
 
-- The client sends requests to `DnsRecords/{domainName}` on the configured API.
-- The `provider` value is passed through to the API as-is; accepted values depend on server-side configuration.
+```bash
+bash ./release.sh 1.0.0
+```
 
-## 🛡️ Privacy and Data
+This script downloads and executes an external release helper from `https://raw.githubusercontent.com/hmlendea/dotnet-release-scripts/master/release/dotnet/10.0.sh`.
 
-Dynamic DNS Updater Client is a self-hosted command-line application that does not collect, store, or transmit personal data beyond what is necessary to update DNS records via the configured API. The application detects the public IP address and sends it along with the domain name, provider name, and API key to the Dynamic DNS Updater API endpoint configured by the operator.
+**Note:** Piping into `bash` is an intensely controversial topic. Please review any external scripts before running them in your environment!
 
-For the detailed description of how the application handles privacy and personal data, see [PRIVACY.md](./PRIVACY.md).
+## ⚙️ GitHub Actions
 
-## 📑 Table of Contents
+| Workflow | Purpose | What it does |
+|----------|---------|--------------|
+| [ dotnet.yml ](https://github.com/hmlendea/dynamic-dns-updater-client/blob/master/.github/workflows/dotnet.yml) | Continuous integration | Restores dependencies, builds the solution, and runs tests on every push and pull request to `master` |
 
-- [Capabilities](#-capabilities)
-- [Usage](#-usage)
-  - [CLI Options](#-cli-options)
-  - [Example](#-example)
-- [Build](#-build)
-- [Logging](#-logging)
-- [Notes](#-notes)
-- [Contributing](#-contributing)
-- [Project Engagement](#-project-engagement)
-- [License](#-license)
+## 🗂️ Project Structure
+
+### Projects and Packages
+
+| Project | Type | Purpose |
+|---------|------|---------|
+| `DynamicDnsUpdater.Client` | Console Application | Main CLI application |
+| `DynamicDnsUpdater.Client.UnitTests` | Unit Test Project | Unit tests for the client |
 
 ## 🤝 Contributing
 
@@ -164,4 +194,5 @@ If you find this project useful, consider [funding it](https://hmlendea.go.ro/fu
 
 ## 📄 License
 
-This project is licensed under the GPLv3 License. See `LICENSE` for details.
+This project is being distributed under the `GNU General Public License v3.0 or later`.
+See [LICENSE](./LICENSE) for additional information.
