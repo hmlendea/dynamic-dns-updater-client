@@ -28,6 +28,9 @@ CLI application that updates a DNS record through the Dynamic DNS Updater API.
 - [GitHub Actions](#-github-actions)
 - [Project Structure](#-project-structure)
   - [Projects and Packages](#-projects-and-packages)
+- [Documentation](#-documentation)
+- [FAQ](#-faq)
+- [Troubleshooting](#-troubleshooting)
 - [Contributing](#-contributing)
 - [Code of Conduct](#-code-of-conduct)
 - [Security](#-security)
@@ -158,6 +161,27 @@ This script downloads and executes an external release helper from `https://raw.
 |---------|------|---------|
 | `DynamicDnsUpdater.Client` | Console Application | Main CLI application |
 | `DynamicDnsUpdater.Client.UnitTests` | Unit Test Project | Unit tests for the client |
+
+## 📚 Documentation
+
+The [repository knowledge base](./docs/INDEX.md) traces implementation, execution flows, configuration, tests, and operational boundaries. It distinguishes verified behaviour from unresolved policy/prose discrepancies.
+
+| Resource | Description |
+|----------|-------------|
+| [Documentation index](./docs/INDEX.md) | Complete catalogue and review metadata |
+| [Quick start](./docs/quick-start.md) | Working-directory guidance and verified double-hyphen CLI syntax |
+| [Architecture](./docs/architecture.md) | Runtime topology and ownership boundaries |
+| [DNS update flow](./docs/flows/dns-update.md) | Discovery, HTTP submission, logging, and failure paths |
+| [Change guide](./docs/change-guide.md) | Implementation/test impact map |
+| [Open questions](./docs/ambiguities-and-open-questions.md) | Known documentation contradictions and unverified contracts |
+
+## ❓ FAQ
+
+See the [Frequently Asked Questions](./docs/faq.md) for responses to frequently raised inquiries.
+
+## 🩺 Troubleshooting
+
+See [Troubleshooting Guide](./docs/troubleshooting.md) for diagnostic procedures and resolutions to recurring problems.
 
 ## 🤝 Contributing
 
